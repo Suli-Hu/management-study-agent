@@ -63,7 +63,7 @@
 - 命名规范：`{页面key}/{viewport}.png`（默认 desktop ~2900×1500）；同页多状态用 `{viewport}-{状态}.png`
 - 缺失截图清单见 §1.3，补全方式见 §1.4
 
-### 1.1 已归档清单（23 张，按页面分类）
+### 1.1 已归档清单（26 张，按页面分类）
 
 #### A. 公开页（无需登录）
 
@@ -71,6 +71,9 @@
 |---|---|---|---|
 | 1.1.1 | 登录页 | [signin/desktop.png](screenshots/signin/desktop.png) | 邮箱+密码 form / 记住 30 天 / 注册/忘记密码 link / 演示访问入口 |
 | 1.1.2 | 演示登录页 | [signin-demo/desktop.png](screenshots/signin-demo/desktop.png) | 仅密码 form（演示账号通道，无邮箱） |
+| 1.1.3 | 注册页 | [signup/desktop.png](screenshots/signup/desktop.png) | 邮箱 / 密码（≥ 8 位含字母+数字）/ 显示名（可选）/ 发送验证码 button |
+| 1.1.4 | 密码重置入口 | [password-reset/desktop.png](screenshots/password-reset/desktop.png) | 输入注册邮箱 → 发送重置链接 |
+| 1.1.5 | 设计规范页（full-page）| [design-system/desktop.png](screenshots/design-system/desktop.png) | sususu 设计规范 — 10 section 全长（设计哲学/颜色/字体/间距/圆角/阴影/组件/渲染原子/响应式/守则）|
 
 #### B. 学科首页（登录后）
 
@@ -153,13 +156,13 @@
 按系统功能盘点；编号占位，补图时按命名规范放到对应路径，文档自动 link 即可。
 
 #### 公开页（无需登录）
-- [ ] **1.A.1 注册页** `signup/desktop.png`
-- [ ] **1.A.2 注册成功（待邮件确认）** `signup/desktop-sent.png`
-- [ ] **1.A.3 密码重置入口** `password-reset/desktop.png`
-- [ ] **1.A.4 密码重置成功** `password-reset/desktop-sent.png`
-- [ ] **1.A.5 密码重置确认页（点邮件来）** `password-reset/desktop-confirm.png`
-- [ ] **1.A.6 设计规范页** `design-system/desktop.png` — 公开可截
-- [ ] **1.A.7 个人记录链接（24h 有效）页** `private/desktop.png` — 通过分享链接打开
+- [x] ~~**1.A.1 注册页** `signup/desktop.png`~~ → 已归档为 §1.1.3
+- [ ] **1.A.2 注册成功（待邮件确认）** `signup/desktop-sent.png` — 需触发提交流程（playwright fill+click 可补）
+- [x] ~~**1.A.3 密码重置入口** `password-reset/desktop.png`~~ → 已归档为 §1.1.4
+- [ ] **1.A.4 密码重置成功** `password-reset/desktop-sent.png` — 需触发提交流程
+- [ ] **1.A.5 密码重置确认页（点邮件来）** `password-reset/desktop-confirm.png` — 需邮件 token，难度高
+- [x] ~~**1.A.6 设计规范页** `design-system/desktop.png`~~ → 已归档为 §1.1.5
+- [ ] **1.A.7 个人记录链接（24h 有效）页** `private/desktop.png` — 通过分享链接打开（你登录后生成 link 给我）
 
 #### 学科级页面（登录后）
 - [ ] **1.B.1 KP 详情 - flat-list format** `kp-detail/desktop-flat-list.png`
