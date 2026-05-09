@@ -56,59 +56,168 @@
 
 ## 1. 当前页面截图（最优先）
 
-### 【研发 / 产品】说明
+### 【研发 / 产品】说明 — 2026-05-07 更新
 
-- **尚未**在仓库中提交任何 PNG；请产品按 §1.2 目录创建并 PR。
-- **设计规范页**线上可截：`https://study.sususu.org/design-system`（**公开**，无需登录）。
+- **23 张已归档** 到 `agent/design/screenshots/{页面key}/{文件名}.png`（v0.11.x 状态，prod 部署版本 v0.11.14·773aada）
+- **设计规范页**线上可截：`https://study.sususu.org/design-system`（**公开**，无需登录）
+- 命名规范：`{页面key}/{viewport}.png`（默认 desktop ~2900×1500）；同页多状态用 `{viewport}-{状态}.png`
+- 缺失截图清单见 §1.3，补全方式见 §1.4
 
-### 1.1–1.4（维持设计师原模板）
+### 1.1 已归档清单（23 张，按页面分类）
 
-（视口、命名、关键状态清单、页面勾选清单 —— **请产品逐项勾选并上传**。）
-<img width="2940" height="1502" alt="image" src="https://github.com/user-attachments/assets/6be256b8-7eea-4a79-a69f-87f608ccde6b" />
-<img width="2926" height="1498" alt="image" src="https://github.com/user-attachments/assets/71afc7d7-9f45-4477-9b25-c9d2469f1321" />
-<img width="2904" height="1392" alt="image" src="https://github.com/user-attachments/assets/19204b66-21d1-41f1-99ae-e0bb24911455" />
-<img width="648" height="740" alt="image" src="https://github.com/user-attachments/assets/471d4d7e-a547-48a0-ab00-b0c446853bac" />
-<img width="598" height="496" alt="image" src="https://github.com/user-attachments/assets/1e615d87-4b09-46c6-8439-12bd63a19f34" />
-<img width="2928" height="1516" alt="image" src="https://github.com/user-attachments/assets/3dea591d-1aa6-47b6-813f-47bb0e5a585a" />
-<img width="2938" height="758" alt="image" src="https://github.com/user-attachments/assets/58f147ec-2268-49fa-98d9-41259610ee2f" />
-<img width="2928" height="1496" alt="image" src="https://github.com/user-attachments/assets/21d3281d-721f-438b-8536-edb00654de51" />
-<img width="2908" height="1494" alt="image" src="https://github.com/user-attachments/assets/0a907918-1f56-4949-a491-06b8dacd457f" />
-<img width="2928" height="1474" alt="image" src="https://github.com/user-attachments/assets/dd0d98dc-e23b-4cec-8431-1eecdb1fa33a" />
-<img width="2940" height="1474" alt="image" src="https://github.com/user-attachments/assets/ff11bc20-afee-4336-8ef5-5ae63307074c" />
-<img width="2922" height="1492" alt="image" src="https://github.com/user-attachments/assets/16d478c0-a106-401b-ae1c-aeafffc8a5c3" />
-<img width="2914" height="1498" alt="image" src="https://github.com/user-attachments/assets/f11f1203-9a72-4fba-96a2-a2a8bb86e44d" />
-<img width="2918" height="1492" alt="image" src="https://github.com/user-attachments/assets/86376576-7322-4d8e-a9d1-12494d9bc3af" />
-<img width="1832" height="790" alt="image" src="https://github.com/user-attachments/assets/9e04d389-1265-418b-948d-4b5e1c43a642" />
-<img width="1822" height="1340" alt="image" src="https://github.com/user-attachments/assets/661fc157-d0a7-4419-bd9e-7650c08c82d9" />
-<img width="2918" height="1502" alt="image" src="https://github.com/user-attachments/assets/c238c8d5-999f-4026-a14f-3f2c29d7f8e0" />
-<img width="2916" height="1500" alt="image" src="https://github.com/user-attachments/assets/a5446bfa-2b0c-43f1-9c15-9f26b5f13e63" />
-<img width="2924" height="1498" alt="image" src="https://github.com/user-attachments/assets/0aef7c18-851c-4e43-8f96-84f61a0d2346" />
-<img width="2914" height="1460" alt="image" src="https://github.com/user-attachments/assets/1da0bac4-77a5-41ab-bb42-cc593b239e31" />
-<img width="2892" height="1468" alt="image" src="https://github.com/user-attachments/assets/1d455164-c00b-44d0-b63b-9d94ff1b7449" />
-<img width="2762" height="1474" alt="image" src="https://github.com/user-attachments/assets/c382480b-c95c-4b15-9cec-e42bf52122db" />
-<img width="1320" height="1520" alt="image" src="https://github.com/user-attachments/assets/25e8aed8-13e1-49f2-8797-9e8064c46525" />
+#### A. 公开页（无需登录）
 
+| # | 页面 | 文件 | 关键元素 |
+|---|---|---|---|
+| 1.1.1 | 登录页 | [signin/desktop.png](screenshots/signin/desktop.png) | 邮箱+密码 form / 记住 30 天 / 注册/忘记密码 link / 演示访问入口 |
+| 1.1.2 | 演示登录页 | [signin-demo/desktop.png](screenshots/signin-demo/desktop.png) | 仅密码 form（演示账号通道，无邮箱） |
 
+#### B. 学科首页（登录后）
 
+| # | 页面 | 文件 | 关键元素 |
+|---|---|---|---|
+| 1.2.1 | 学科首页 / 学科卡片列表 | [home-disciplines/desktop.png](screenshots/home-disciplines/desktop.png) | 4 个学科卡片：经营学（58 学派/713 KP）、市场营销学（21/215）、风险管理论（即将上线）、统计学（即将上线）；每卡右侧"编辑"按钮 |
 
+#### C. Nav 顶部菜单/弹窗
 
+| # | 元素 | 文件 | 触发 |
+|---|---|---|---|
+| 1.3.1 | 设置弹窗 - admin 菜单 | [nav/settings-menu-admin.png](screenshots/nav/settings-menu-admin.png) | 齿轮按钮（admin 视角）：学科管理 🔥 / 用户权限管理 🔥 / API Tokens 🔥 / 切换夜间模式 |
+| 1.3.2 | 头像弹窗 | [nav/avatar-menu.png](screenshots/nav/avatar-menu.png) | 头像按钮：学科选择 / 退出登录 |
 
+#### D. 学派详情页（KP 列表 + 详情区分栏布局）
 
+| # | 状态 | 文件 | 说明 |
+|---|---|---|---|
+| 1.4.1 | Hero 区 + 视图切换 chip | [school-detail/desktop-hero.png](screenshots/school-detail/desktop-hero.png) | 学派标题"经营学笔记 / Management" + 视图 chip（全集 / 组织论的脉络 / 斯科特三角 / 斯科特四象限 / + 新建视图）+ 说明 / 编辑视图 button |
+| 1.4.2 | 视图说明展开（组织论的脉络） | [school-detail/desktop-with-view-description.png](screenshots/school-detail/desktop-with-view-description.png) | 选中视图后，显示视图描述 + 学派分组（古典组织论 / 新古典组织论 ...） |
+| 1.4.3 | KP accordion format 详情 | [school-detail/desktop-with-kp-accordion.png](screenshots/school-detail/desktop-with-kp-accordion.png) | 左：学派 sidebar (科学管理学派) / 中：KP 列表 / 右：选中 KP 的 accordion format（5 步骤折叠展开） |
+| 1.4.4 | KP narrative format 详情 | [school-detail/desktop-with-kp-narrative.png](screenshots/school-detail/desktop-with-kp-narrative.png) | KP "情绪劳动" body 是一段 prose 散文 |
+| 1.4.5 | 窄栏 split 视图 | [school-detail/desktop-narrow-split.png](screenshots/school-detail/desktop-narrow-split.png) | 窄屏下 KP 列表 + 详情区上下分布；每行展示 中文/日文/英文/学者/年份 |
 
+#### E. 视图编辑器 Drawer
 
+| # | 元素 | 文件 | 说明 |
+|---|---|---|---|
+| 1.5.1 | 编辑视图 drawer | [view-editor/desktop-drawer.png](screenshots/view-editor/desktop-drawer.png) | 视图名称 / 描述 + 左侧候选学派列表 + 右侧已加入分组（个体层面/群体层面/古典组织论...）|
 
+#### F. KP 详情页（5 种 body format + 学派 sidebar tabs）
 
+| # | format | 文件 | KP 例 |
+|---|---|---|---|
+| 1.6.1 | compare 3 列卡片 | [kp-detail/desktop-compare-3col.png](screenshots/kp-detail/desktop-compare-3col.png) | "冲突观的三阶段演进" — 传统/行为科学/相互作用 三列对比 |
+| 1.6.2 | accordion 折叠分组 | [kp-detail/desktop-accordion.png](screenshots/kp-detail/desktop-accordion.png) | "冲突的源泉" — 个人要因 + 状况要因 折叠 ol |
+| 1.6.3 | compare 2 列卡片 | [kp-detail/desktop-compare-2col.png](screenshots/kp-detail/desktop-compare-2col.png) | "显性冲突 vs 潜在冲突" 二列对比 + 评价模块 |
+| 1.6.4 | 学派 sidebar - 概述 tab | [kp-detail/desktop-overview-tab.png](screenshots/kp-detail/desktop-overview-tab.png) | "冲突管理论" 概述 - 9 行学派叙事 |
+| 1.6.5 | 学派 sidebar - 代表学者 tab | [kp-detail/desktop-scholars-tab.png](screenshots/kp-detail/desktop-scholars-tab.png) | 9 位学者列表（中/日双语 + 头衔） |
 
+#### G. 学者列表
 
+| # | 文件 | 说明 |
+|---|---|---|
+| 1.7.1 | [scholars-list/desktop.png](screenshots/scholars-list/desktop.png) | 经营学笔记·共 202 位 / 字母索引 A-Z / 卡片显示生卒+任职+KP 数（如 1 KP / 2 KP） |
 
+#### H. 知识点列表
 
+| # | 文件 | 说明 |
+|---|---|---|
+| 1.8.1 | [kps-list/desktop.png](screenshots/kps-list/desktop.png) | 经营学笔记·共 721 条 / tag 横向筛选（个体的世界 / 人与人之间 / ...） / 个体的世界分组列表 |
 
+#### I. 学习记录页（3 视图切换 chip）
 
+| # | 视图 | 文件 |
+|---|---|---|
+| 1.9.1 | 日志流（30 天累计 + 4 个月热力图 + 时间轴） | [study-log/desktop-daily.png](screenshots/study-log/desktop-daily.png) |
+| 1.9.2 | 知识点排行（按累计时长降序）| [study-log/desktop-rank.png](screenshots/study-log/desktop-rank.png) |
+| 1.9.3 | 学派段位（C/B/A 段位规则 + 学派进度条 + 练习入口）| [study-log/desktop-tier.png](screenshots/study-log/desktop-tier.png) |
 
+#### J. 编辑器（admin only）
 
+| # | 编辑器 | 文件 | 说明 |
+|---|---|---|---|
+| 1.10.1 | 学派编辑 | [school-edit/desktop.png](screenshots/school-edit/desktop.png) | 顶部「← 返回学派 / 删除（disabled）/ 保存」+ 基本信息（中/日/英标题、时代）+ 内容（概述）|
+| 1.10.2 | KP 编辑 | [kp-edit/desktop.png](screenshots/kp-edit/desktop.png) | 顶部 + 基本信息（标题、年份）+ 关联（所属学派 / 关联学者 / 标签）+ 主体（body format 切换：narrative/条目/折叠/对比/quad） |
 
+---
 
+### 1.2 文件命名规范
 
+- `screenshots/{页面key}/{viewport}.png` — 默认 desktop ~2900×1500
+- 同页多状态：`{viewport}-{状态描述}.png`（如 `desktop-hero.png`、`desktop-with-kp-accordion.png`）
+- 弹窗 / dropdown：直接用功能命名（如 `settings-menu-admin.png`、`avatar-menu.png`）
+- 移动端：`mobile.png` ~390×844；平板：`tablet.png` ~768×1024
+- 暗色模式：在 viewport 后加 `-dark`（如 `desktop-dark.png`）
+
+### 1.3 缺失截图清单（待补全）
+
+按系统功能盘点；编号占位，补图时按命名规范放到对应路径，文档自动 link 即可。
+
+#### 公开页（无需登录）
+- [ ] **1.A.1 注册页** `signup/desktop.png`
+- [ ] **1.A.2 注册成功（待邮件确认）** `signup/desktop-sent.png`
+- [ ] **1.A.3 密码重置入口** `password-reset/desktop.png`
+- [ ] **1.A.4 密码重置成功** `password-reset/desktop-sent.png`
+- [ ] **1.A.5 密码重置确认页（点邮件来）** `password-reset/desktop-confirm.png`
+- [ ] **1.A.6 设计规范页** `design-system/desktop.png` — 公开可截
+- [ ] **1.A.7 个人记录链接（24h 有效）页** `private/desktop.png` — 通过分享链接打开
+
+#### 学科级页面（登录后）
+- [ ] **1.B.1 KP 详情 - flat-list format** `kp-detail/desktop-flat-list.png`
+- [ ] **1.B.2 KP 详情 - quad（2x2 矩阵）format** `kp-detail/desktop-quad.png`
+- [ ] **1.B.3 KP 详情 - quad cell 翻面（详情背面）** `kp-detail/desktop-quad-cell-back.png`
+- [ ] **1.B.4 KP 详情 - compare 卡片翻面** `kp-detail/desktop-compare-flipped.png`
+- [ ] **1.B.5 学者详情页（个人 + 代表 KP 列表）** `scholar-detail/desktop.png`
+- [ ] **1.B.6 全局搜索 spotlight（命中 KP/学派/学者）** `search/desktop.png`
+- [ ] **1.B.7 新建学习记录 modal** `study-log/desktop-new-record.png`
+- [ ] **1.B.8 学习记录 - 空状态（首次访问）** `study-log/desktop-empty.png`
+- [ ] **1.B.9 全科笔记入口（多学科切换页）** `home-overview/desktop.png`
+
+#### 编辑器 admin 状态（功能性）
+- [ ] **1.C.1 学者编辑** `scholar-edit/desktop.png`
+- [ ] **1.C.2 学派组（theme）编辑** `theme-edit/desktop.png`
+- [ ] **1.C.3 视图编辑（spotlight UI 全屏）** `view-edit/desktop-full.png`
+- [ ] **1.C.4 KP 编辑 - 5 种 body format 切换面板** `kp-edit/desktop-format-{narrative,flat-list,accordion,compare,quad}.png` × 5
+- [ ] **1.C.5 编辑器删除按钮 disabled + tooltip（v0.11.5 新加）** `school-edit/desktop-delete-disabled.png`
+- [ ] **1.C.6 chipPicker 第一项高亮（v0.11.3 新加）** `kp-edit/desktop-chippicker-first-match.png`
+- [ ] **1.C.7 KP 编辑 textarea 输入回车预览（v0.11.7 
+ 换行）** `kp-edit/desktop-newline.png`
+- [ ] **1.C.8 KP 删除二次确认（confirm()）** `_dialog/kp-delete-confirm.png`
+
+#### Admin only 系统页
+- [ ] **1.D.1 学科管理（list / 新建 / 编辑）** `admin/disciplines.png`
+- [ ] **1.D.2 用户权限管理** `admin/users.png`
+- [ ] **1.D.3 API Tokens** `admin/tokens.png`
+
+#### 移动端（mobile viewport ~390×844 / iPad Mini ~768×1024）
+- [ ] **1.E.1 学科首页 mobile** `home-disciplines/mobile.png`
+- [ ] **1.E.2 学派详情页 mobile（split 上下布局）** `school-detail/mobile.png`
+- [ ] **1.E.3 KP 详情 mobile × 5 format** `kp-detail/mobile-{format}.png`
+- [ ] **1.E.4 学习记录 mobile（3 视图）** `study-log/mobile-{daily,rank,tier}.png`
+- [ ] **1.E.5 nav 折叠菜单 mobile** `nav/mobile-collapsed.png`
+- [ ] **1.E.6 KP 编辑器 mobile** `kp-edit/mobile.png`
+
+#### 暗色模式（dark mode）
+- [ ] **1.F.1 主要 5 页面 × dark mode** — 公开 + 学科 + 详情 + 学习 + 编辑器
+- [ ] **1.F.2 验证 L3 tag 色（OB/SM/OT 等）在 dark mode 仍可识别** `_token/tags-dark.png`
+
+#### 重要状态/边界
+- [ ] **1.G.1 toast - success / error** `_toast/{success,error}.png`
+- [ ] **1.G.2 confirm() 删除二次确认 dialog** `_dialog/delete-confirm.png`
+- [ ] **1.G.3 学派 0 KP 空状态** `school-detail/desktop-empty.png`
+- [ ] **1.G.4 学派 sidebar 0 学者 / 0 视图** `school-detail/desktop-empty-aside.png`
+- [ ] **1.G.5 网络错误页** `_error/network.png`
+- [ ] **1.G.6 404 页** `_error/404.png`
+- [ ] **1.G.7 403 forbidden（非 admin 试图编辑）** `_error/403.png`
+
+### 1.4 怎么补这些缺失截图
+
+| 选项 | 怎么做 | 适用场景 |
+|---|---|---|
+| **A. 自截 PR**（默认）| 你开浏览器截图，按 §1.2 命名规范放到 `agent/design/screenshots/{key}/{viewport}.png`，PR | 大部分页面 — 你登录态最方便 |
+| **B. Chrome MCP 代截** | 你 Chrome 装 Claude in Chrome 扩展 → PM 远程操作 navigate + screenshot → 你监督 | 公开页（不需要登录态切换）批量补 |
+| **C. TBD 留空** | 在 §1.3 勾选项保留 `[ ]`，先专注其他 section（§3 组件规格、§4 page pattern） | 边界情况（toast / 404 / dark mode），不阻塞设计师启动 |
+
+PM 推荐 **A + C 组合**：你截 §1.B（KP 5 format / 学者详情 / search），其他次要状态留 TBD，先让设计师拿到主页面去做 §3 §4。
 
 
 ---
