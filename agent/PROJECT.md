@@ -37,6 +37,10 @@ Core content model (4 layers):
 - For any frontend-visible requirement: **run local dev server + provide an HTML demo** as the default acceptance artifact.
 - See `agent/FRONTEND_WORKFLOW.md`.
 
+## HTTP API (agents / scripts)
+- Short checklist for Base URL, auth, `discipline` key, list/create endpoints: `agent/API.md`.
+- Full reference (deployed mirror): https://study.sususu.org/docs/api-reference.md
+
 ## Operational gotchas (engineering)
 - **D1 bind limit**: large `IN (?,?,...)` can fail around ~100 binds; prefer discipline-scoped queries or chunking.
 - **Local D1 is per worktree**: new worktrees start with an empty local D1 unless migrations/data are applied.
