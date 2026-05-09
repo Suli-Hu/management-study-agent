@@ -505,3 +505,324 @@ D. chip 1-18 bug 复盘「最终结论」：
 [ ] Q3. chip 1-18 最终数值规范是否成文？文档链接？
 [ ] Q4. 各 discipline 线上 tag 库与 git `data/*/discipline.json` 是否一致？谁 export？
 ```
+
+---
+
+## 13. 设计规范页全文 mirror（/design-system）
+
+> **来源**：`https://study.sususu.org/design-system`（公开页，无需登录）。  
+> **生成方式**：反向提取自 `v2/src/styles/{tokens, global, components}.css` + `tailwind.config.ts`，本节是其文本镜像。改 token 改源 CSS，本节同步重生成（v0.11.14 快照）。  
+> **设计哲学一句话**：设计的目的不是把它做漂亮，而是把它做"必然"——能删的元素一定删掉。
+
+### 13.1 设计哲学（§1）
+
+— 三层颜色 · 信息密度优先 —
+
+sususu 是经营学备考工具。对学习者而言"内容是主角，设计是空气"——任何抢戏的视觉装饰都是噪音。设计语言遵循三个核心原则：
+
+1. 色彩按职责分三层（**不混用**）
+2. 字号优先信息密度（基础 14 px）
+3. affordance 不重复（学派色已表达身份就不再加 dot）
+
+> **双 token 体系并存**：v0.8.x 起站点同时跑 v1.0 token（`--bg / --text / --primary` 等，`tokens.css`）和 legacy token（`--color-text-primary / --color-bg-primary` 等，`global.css`）。新组件默认走 v1.0；旧组件渐进迁移。两套都支持 dark mode 自动反相，同步切换。
+
+### 13.2 颜色（§2）
+
+— 三层 · L1 主题 / L2 语义 / L3 分类 —
+
+每个色值都问"它表达的是什么职责"再选层。**L1 仅 focus / 主操作 / 文字；L2 仅按数据维度；L3 仅学派归属**。任何新组件需色彩时按此顺序自上而下选——选不出说明 token 缺失，先补 token 再用。
+
+#### L1 · 主题色（墨黑 / Sumi）
+页面背景 / 文字 / 主按钮 / 链接 / focus 环。这是站点的"骨"。
+
+| Token | 用途 |
+|---|---|
+| `--bg` | 页面背景 · 暖白纸 |
+| `--bg-elev` | 卡片 / 浮层 |
+| `--bg-soft` | 区块底 / 弱填充 |
+| `--border` | 主描边 |
+| `--border-soft` | 弱描边 |
+| `--text` | 主文字 |
+| `--text-2` | 次文字 |
+| `--text-3` | 弱文字 / placeholder |
+| `--primary` | 主色 = 墨黑本身 |
+| `--primary-soft` | 主色弱底（hover / 激活背景） |
+| `--link` | 行内链接 |
+| `--focus` | focus 环（v0.5.90 后全局取消 outline） |
+
+#### L2 · 语义色 / 强度（Intensity）
+热力图 / 强度条 / 数据密度。蓝（hue 245），明度 0.92 → 0.45 共 5 阶 + 0 阶无数据。
+
+| Token | 含义 |
+|---|---|
+| `--i-0` | 无数据 |
+| `--i-1` | < 15 min |
+| `--i-2` | 15–30 min |
+| `--i-3` | 30–60 min |
+| `--i-4` | 1–2 h |
+| `--i-5` | 2 h+ |
+
+#### L2 · 语义色 / 状态（State）
+toast / banner / 表单校验。明度 ≈ 0.55，饱和度低于 tag——不抢戏。每个 state 配 soft 弱底。
+
+| Token | 含义 | Token (soft) |
+|---|---|---|
+| `--s-success` | 成功 | `--s-success-soft` |
+| `--s-warning` | 警告 | `--s-warning-soft` |
+| `--s-danger` | 危险 / 错误 | `--s-danger-soft` |
+| `--s-info` | 信息 | `--s-info-soft` |
+| `--s-locked` | 锁定 / 禁用 | — |
+
+#### L2 · 语义色 / 段位 Tier
+C / B / A / S 段位徽章。色板从 9 → 4，亚档（- / +）由文字承担不增色。
+
+| Token | 含义 |
+|---|---|
+| `--tier-c` | 灰 — 未入门 |
+| `--tier-b` | 实木棕 — 基础 |
+| `--tier-a` | 古铜金 — 进阶（含 nobel） |
+| `--tier-s` | 深靛 — 大师 |
+
+#### L2 · 语义色 / 进度（Progress）
+
+| Token | 含义 |
+|---|---|
+| `--p-track` | 进度槽底 |
+| `--p-fill` | 进度填充 |
+
+#### L3 · 分类色 / 学派 Tag
+知识点圆点 / 角标 / sparkline 配色。**永不动**——新增学派只能从已有 8 色里选，dark mode 不变（保持识别一致性）。
+
+| Token | 含义 |
+|---|---|
+| `--tag-mgmt` | 经营 (SM) 绿 |
+| `--tag-mkt` | 营销 (OB) 黄 |
+| `--tag-soc` | 社会 (OT) 棕 |
+| `--tag-purple` | 紫 |
+| `--tag-pink` | 粉 |
+| `--tag-cyan` | 青 |
+| `--tag-blue` | 蓝 |
+| `--tag-orange` | 橙 |
+
+#### Legacy · accent 固定 hex（Tailwind 配置）
+Tailwind 颜色 `accent.ob / classic / strategy / warning`，写死 hex 不随 dark mode 变。新组件优先用 L3 tag 色。
+
+| Tailwind class | Hex | 含义 |
+|---|---|---|
+| `accent-ob` | `#34C759` | iOS 绿 |
+| `accent-classic` | `#FF9500` | iOS 橙 |
+| `accent-strategy` | `#007AFF` | iOS 蓝（链接 / ghost btn） |
+| `accent-warning` | `#FF3B30` | iOS 红 |
+
+### 13.3 字体（§3）
+
+— SF Pro · 4 px 行高节奏 · 信息密度优先 —
+
+全栈系统字体——没有 webfont（除 Brand 用 Kalam 700）。SF Pro 优先 → PingFang SC / Hiragino Sans / Noto Sans CJK 兜底。基础字号 14 px 比常规 web app 略小，原则是"阅读为先 · 信息密度优先"。
+
+#### 字体栈
+
+```
+-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+"PingFang SC", "Hiragino Sans", "Noto Sans CJK SC", "Microsoft YaHei",
+sans-serif
+```
+
+#### 字号 scale（Tailwind `text-*`）
+
+| Key | px | line-height | 用途 |
+|---|---|---|---|
+| `xs` | 11 px | 1.5 | eyebrow / count / meta — 11 px 是底线 |
+| `sm` | 12 px | 1.5 | 小描述 / 表单 label / chip 文字 |
+| `body` | 13.5 px | 1.7 | 默认正文 — 学派详情 summary / KP 长文 |
+| `base` | 14 px | 1.7 | 基础正文 / KP body 卡片名 |
+| `lg` | 16 px | 1.6 | 关键链接 / 强调正文 |
+| `xl` | 20 px | 1.4 | section 标题 |
+| `2xl` | 24 px | 1.3 | page hero 标题 |
+| `3xl` | 28 px | 1.25 | 大标题（极少用） |
+
+#### 字重
+
+- **Regular 400** · 正文
+- **Semibold 600** · 标题 / 加粗
+- light 300 已弃用
+
+#### 特殊文字组件
+
+- `.section-eyebrow` — 11 px / 600 / letter-spacing 0.1em / uppercase / text-3
+- `.page-hero` / `.page-hero-eyebrow` / `.page-hero-title` / `.page-hero-sub` — 页面 hero 区域；副标题 13 px 次文字色，行高 1.55
+
+### 13.4 间距（§4）
+
+— 4 px 网格 —
+
+全部间距走 4 px 网格（基础 4 → 8 → 12 → 16…）。打破 4 px 时只允许 2 px (0.5)。垂直节奏靠倍数对齐——**不允许 padding 13 px / margin 17 px 这类破坏感**。
+
+| Token | px | 用途 |
+|---|---|---|
+| `spacing.0.5` | 2 px | 微缝 |
+| `spacing.1` | 4 px | 基础单位 |
+| `spacing.1.5` | 6 px | — |
+| `spacing.2` | 8 px | chip 内距 |
+| `spacing.3` | 12 px | 卡内距 |
+| `spacing.4` | 16 px | 卡间距 |
+| `spacing.5` | 20 px | — |
+| `spacing.6` | 24 px | section 间距 |
+| `spacing.8` | 32 px | — |
+| `spacing.10` | 40 px | — |
+| `spacing.12` | 48 px | nav 高 |
+
+#### 阅读宽度
+
+| Token | px | 用途 |
+|---|---|---|
+| `max-w-reading` | 720 px | 正文 |
+| `max-w-panel` | 900 px | KP pane |
+
+### 13.5 圆角（§5）
+
+— 4 / 6 / 8 / 10 / 12 / 16 —
+
+愈紧凑愈小、愈大块愈大。chip / pill 用 999 px (full)，卡片用 8–12 px，hero card 用 12 px。**不用 4 px 之外的奇数（5 / 7 / 9 px 都禁止）**。
+
+| Token | px | 用途 |
+|---|---|---|
+| `rounded-sm` | 4 px | 标签 / mark |
+| `rounded` | 6 px | 默认 / 输入框 |
+| `rounded-md` | 8 px | 菜单 / chip |
+| `rounded-lg` | 10 px | 大卡 |
+| `rounded-xl` | 12 px | hero card / theme group |
+| `rounded-2xl` | 16 px | 极大块 |
+| `rounded-full` | 999 px | pill / chip / dot |
+
+### 13.6 阴影（§6）
+
+— 极克制 · 仅卡片 / 浮层用 —
+
+站点视觉是"纸 + 墨"。阴影只在卡片提升层级（card）与浮层（menu / modal）出现，正文区域不准用。dark mode 下阴影自动失去意义（背景与卡片对比已弱），主要靠 border 区分。
+
+| Token | 阴影值 | 用途 |
+|---|---|---|
+| `shadow-card` | `0 1px 4px rgba(0,0,0,0.06)` | hero card · 静态 |
+| `shadow-card-hover` | `0 2px 8px rgba(0,0,0,0.08)` | hover 抬升 |
+| `shadow-kp` | `0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04)` | KP card · 极弱 |
+| menu (inline) | `0 8px 24px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04)` | overflow 菜单 / dropdown |
+
+### 13.7 组件（§7）
+
+— 按钮 / chip / 卡 / 表单 / 空态 —
+
+#### 按钮
+
+| 类名 | 描述 |
+|---|---|
+| `.btn-ghost-strategy` | 提交按钮 · 蓝边白底蓝字 → hover 实底 |
+| `.icon-add-btn` | 新增按钮 · 32 × 32 圆 · transparent → hover bg-secondary |
+| `.hero-icon-btn` | 图标按钮 · 36 × 36 圆 · hero 头部右侧 · 触屏 ≥ 44 px |
+| `.lang-toggle` / `.is-active` | 语言切换 · primary 描边胶囊 · `Cmd/Ctrl+J` 触发 |
+
+#### Chip / Pill
+
+| 类名 | 描述 |
+|---|---|
+| `.chip` | 2 px 内距 · 12 px font · semibold · border + bg |
+| `.tsp-chip` / `.is-active` | 编辑器 single-picker · 12 px font · 圆 999 · color-mix 弱底 |
+| `.theme-anchor-chip` / `.is-active` | scroll spy 锚点 chip · 11.5 px · active 用 text-primary 实底反白 |
+| `.field-tag` | 学者页 / 学派页 hero 上方分类标 |
+
+#### Alert box
+
+表单错误 / 提示框。Tailwind utility 直拼：`bg-badge-* + text-accent-*`。`--color-badge-*` token 名是历史遗留，今天承担的是 alert tone 职责。
+
+| 类名组合 | tone |
+|---|---|
+| `bg-badge-limit` + `text-accent-warning` | warning |
+| `bg-badge-meaning` + `text-accent-classic` | success |
+| `bg-badge-example` + `--accent-strategy` | info |
+| `bg-badge-neutral` + `--color-text-secondary` | neutral |
+
+> auth 页 / settings / scholars / admin tags 都在用，4 种 tone 对应 warning / success / info / neutral。
+
+#### 卡片
+
+| 类名 | 描述 |
+|---|---|
+| `.hero-card` / `.hero-bar` / `.hero-body` / `.hero-actions` | 学派 / 学者 detail 顶部 · 6 px 左侧 tag strip + 12 px radius |
+| `.theme-group-box` / `-title` / `-count` / `-desc` | 学派列表分组容器 · bg-secondary 圆角 · 12 px radius |
+
+#### 表单
+
+- `input` / `textarea` — v0.6.15 dark mode base · padding 8 × 12 px · radius 6 px · font 13 px
+- `.cp-swatch` / `.cp-hex-input` — color picker · 6 预设 + hex 兜底
+
+#### 空态
+
+- `.empty-right` / `.empty-rings` / `.empty-meta` / `.empty-cta` — split pane 右栏空态 · accent 三圈 + dot
+
+### 13.8 渲染原子（§8）
+
+— KP body 5 种渲染器 —
+
+KP body 数据结构按 `render.kind` 走 5 种渲染器：**flat-list / narrative / accordion / compare / quad**。所有渲染器读 outer wrapper 注入的 `--accent`（学派色），dark mode 自动反相。
+
+#### flat-list (`.body-card`)
+- `.body-items` / `.body-card` / `.body-num`
+- 编号圆 12 px radius + accent 12% color-mix
+- 每项：14 px 半粗名称 + 12 px 次文字描述
+
+#### accordion (`.acc-li`)
+- `.acc-li` / `.acc-li-n` / `.acc-li-name` / `.acc-li-desc`
+- accent 22 × 22 圆环 + bg-elev 内填 · hanging indent 排版
+
+#### compare cards (`.cmpc-card`) — OptionA 学派详情专用
+- `.cmpc-grid` / `.cmpc-card` / `.cmpc-num` / `.cmpc-headline` / `.cmpc-sub` / `.cmpc-meta`
+- 22 px headline 用 accent
+- 卡内：编号 + name + headline + sub（dashed border 分隔元数据） + meta list
+
+#### compare table (`.cmp-row`)
+- `.cmp-table` / `.cmp-row` / `.cmp-pill` / `.cmp-cell`
+- 120 px pill + 1fr cells · `< 1024 px` stack
+- 每行：维度 pill（左）+ cells（右，12 px text-2 行高 1.7）
+
+#### quad chart (`.quad-cell`)
+- `.quad-wrap` / `.quad-cell` / `.quad-axis-x` / `.quad-axis-y`
+- 2 × 2 网格 + 文字坐标轴
+- 移动端 stack 4 行
+- cell 内：emoji + name + tag + desc
+
+#### evaluation (`.eval-row`)
+- `.eval-row` / `.eval-pill`
+- v0.8.23 回滚 v0.5.46 简洁版 · 56 px pill + 1fr text
+- tone 三色：`--s-success`（意义） · `--s-danger`（局限） · `--text-3`（举例）
+
+### 13.9 响应式（§9）
+
+— iPad Mini 主力 · 触屏 hit area —
+
+唯一断点：`max-width: 1023 px`（split pane 退化为单栏）。iPad Mini portrait（768 × 1024）触发 stack；landscape（1024 × 768）仍 split。触屏设备（`pointer: coarse`）所有交互元素强制 ≥ 44 × 44 px hit area。
+
+| 设备 | 视口 | 布局 | 关键变化 |
+|---|---|---|---|
+| iPhone | 375–430 × ... | 单栏 stack | split → single-col · KP open inline body · cmpc 1 col · quad 4 行 |
+| iPad Mini portrait | 768 × 1024 | 单栏 stack | 同上 · 触屏 hit area ≥ 44 px |
+| iPad Mini landscape | 1024 × 768 | 双栏 split | 触发 split pane · 380–420 px left + 1fr right |
+| iPad Pro / Desktop | 1280+ | 双栏 split | 同上 · max-w-panel 900 px 居中 |
+
+### 13.10 守则（§10）
+
+— 违反需明确理由 —
+
+1. **三层颜色不混用** — L1 仅 focus / 主操作 / 文字；L2 仅按数据维度；L3 仅学派归属。主题色不当装饰，tag 色不当 state，state 色不当 tag。
+2. **默认 minimalism** — 能删的元素一定删（v0.8.19 删 redundant tag dot；v0.8.20 修 page chrome accent 重复）。理由"用户能自己写"是合法的。增加元素需要明确职责。
+3. **focus outline 全局取消**（`v0.5.90`）— 单人 admin / iPad 主力，键盘 Tab 视觉是噪音。a11y trade-off 由用户场景决定。selected 态用 left strip / accent ring 替代 focus 环。
+4. **4 px 网格不破** — 间距只允许 4 px 倍数 + 2 px 微缝。padding 13 px / margin 17 px 这类破坏感不允许。
+5. **圆角不奇数** — 4 / 6 / 8 / 10 / 12 / 16 / 999。5 / 7 / 9 px 全禁。
+6. **page chrome accent 不重复**（`v0.8.20`）— 学派 / 学者 detail 页 page chrome 已表达 entity 身份；tab 底边 / 卡内 dot 等 redundant affordance 一律删。
+7. **触屏 hit area ≥ 44 px** — `@media (pointer: coarse)` 强制 lang-toggle / hero-icon-btn 撑到 44 × 44。视觉尺寸不变，只扩点击区。
+8. **Dark mode 是设计而非反相** — tokens 双写 `html.dark` + `[data-mode="dark"]`。tag 色不变（保持识别一致性），状态色 soft 变体专门重写。
+9. **新组件需色彩时先问职责** — 不直接写 hex。L1 → L2 → L3 顺序选层；选不出说明 token 缺失，先补 token 再用。
+
+---
+
+> Mirror of `v2/src/styles/{tokens, global, components}.css` + `tailwind.config.ts`. 改源 CSS / config，本节请同步重生成。  
+> — design-audit by Claude Opus 4.7
