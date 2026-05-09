@@ -15,7 +15,8 @@
 > **Read order (required)**:
 > 1) `agent/PLAYBOOK.md` — how to work (Plan → Execute → Verify → Learn)
 > 2) `agent/PROJECT.md` — engineering facts + product model (what/where/how)
-> 3) `agent/TEACHER.md` — teacher-agent rules + learning workflow + API notes
+> 3) `agent/API.md` — HTTP API checklist (Base URL, auth, discipline **key**, list/create endpoints, curl) — **read before any programmatic writes**
+> 4) `agent/TEACHER.md` — teacher-agent rules + learning workflow + pedagogy notes
 
 ## Repo map (one glance)
 - `v2/` — **the only live product** (Astro + TS + Cloudflare Pages + D1)
