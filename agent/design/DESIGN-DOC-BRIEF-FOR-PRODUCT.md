@@ -63,7 +63,7 @@
 - 命名规范：`{页面key}/{viewport}.png`（默认 desktop ~2900×1500）；同页多状态用 `{viewport}-{状态}.png`
 - 缺失截图清单见 §1.3，补全方式见 §1.4
 
-### 1.1 已归档清单（26 张，按页面分类）
+### 1.1 已归档清单（32 张，按页面分类）
 
 #### A. 公开页（无需登录）
 
@@ -113,12 +113,14 @@
 | 1.6.3 | compare 2 列卡片 | [kp-detail/desktop-compare-2col.png](screenshots/kp-detail/desktop-compare-2col.png) | "显性冲突 vs 潜在冲突" 二列对比 + 评价模块 |
 | 1.6.4 | 学派 sidebar - 概述 tab | [kp-detail/desktop-overview-tab.png](screenshots/kp-detail/desktop-overview-tab.png) | "冲突管理论" 概述 - 9 行学派叙事 |
 | 1.6.5 | 学派 sidebar - 代表学者 tab | [kp-detail/desktop-scholars-tab.png](screenshots/kp-detail/desktop-scholars-tab.png) | 9 位学者列表（中/日双语 + 头衔） |
+| 1.6.6 | narrative full-page | [kp-detail/desktop-narrative.png](screenshots/kp-detail/desktop-narrative.png) | 营销近视眼 (m015) — narrative format prose + 6 字段评价模块 |
 
 #### G. 学者列表
 
 | # | 文件 | 说明 |
 |---|---|---|
 | 1.7.1 | [scholars-list/desktop.png](screenshots/scholars-list/desktop.png) | 经营学笔记·共 202 位 / 字母索引 A-Z / 卡片显示生卒+任职+KP 数（如 1 KP / 2 KP） |
+| 1.7.2 | [scholar-detail/desktop.png](screenshots/scholar-detail/desktop.png) | 学者详情 — Mary Parker Follett 个人资料（生卒/国别/领域/机构/出生）+ 代表 KP 全长 |
 
 #### H. 知识点列表
 
@@ -140,6 +142,15 @@
 |---|---|---|---|
 | 1.10.1 | 学派编辑 | [school-edit/desktop.png](screenshots/school-edit/desktop.png) | 顶部「← 返回学派 / 删除（disabled）/ 保存」+ 基本信息（中/日/英标题、时代）+ 内容（概述）|
 | 1.10.2 | KP 编辑 | [kp-edit/desktop.png](screenshots/kp-edit/desktop.png) | 顶部 + 基本信息（标题、年份）+ 关联（所属学派 / 关联学者 / 标签）+ 主体（body format 切换：narrative/条目/折叠/对比/quad） |
+| 1.10.3 | KP 编辑 - narrative full-page | [kp-edit/desktop-narrative-edit.png](screenshots/kp-edit/desktop-narrative-edit.png) | 营销近视眼 (m015) 编辑全页 — 含 v0.11.5 删除按钮 + v0.11.7 textarea（无 hint）|
+| 1.10.4 | 学者编辑 | [scholar-edit/desktop.png](screenshots/scholar-edit/desktop.png) | Mary Parker Follett 学者编辑 — 基本信息 + 关联 + tag |
+
+#### K. Admin 系统页（super-admin only）
+
+| # | 页面 | 文件 | 说明 |
+|---|---|---|---|
+| 1.11.1 | API Tokens | [admin/tokens.png](screenshots/admin/tokens.png) | 创建 token (名称/关联用户/有效期/学科范围) + 已有 8 个 token list（含撤销 button、ID/创建/有效期/最近使用）|
+| 1.11.2 | 学科管理 | [admin/disciplines.png](screenshots/admin/disciplines.png) | 学科列表 + CRUD |
 
 ---
 
@@ -169,14 +180,14 @@
 - [ ] **1.B.2 KP 详情 - quad（2x2 矩阵）format** `kp-detail/desktop-quad.png`
 - [ ] **1.B.3 KP 详情 - quad cell 翻面（详情背面）** `kp-detail/desktop-quad-cell-back.png`
 - [ ] **1.B.4 KP 详情 - compare 卡片翻面** `kp-detail/desktop-compare-flipped.png`
-- [ ] **1.B.5 学者详情页（个人 + 代表 KP 列表）** `scholar-detail/desktop.png`
+- [x] ~~**1.B.5 学者详情页（个人 + 代表 KP 列表）** `scholar-detail/desktop.png`~~ → 已归档为 §1.7.2
 - [ ] **1.B.6 全局搜索 spotlight（命中 KP/学派/学者）** `search/desktop.png`
 - [ ] **1.B.7 新建学习记录 modal** `study-log/desktop-new-record.png`
 - [ ] **1.B.8 学习记录 - 空状态（首次访问）** `study-log/desktop-empty.png`
 - [ ] **1.B.9 全科笔记入口（多学科切换页）** `home-overview/desktop.png`
 
 #### 编辑器 admin 状态（功能性）
-- [ ] **1.C.1 学者编辑** `scholar-edit/desktop.png`
+- [x] ~~**1.C.1 学者编辑** `scholar-edit/desktop.png`~~ → 已归档为 §1.10.4
 - [ ] **1.C.2 学派组（theme）编辑** `theme-edit/desktop.png`
 - [ ] **1.C.3 视图编辑（spotlight UI 全屏）** `view-edit/desktop-full.png`
 - [ ] **1.C.4 KP 编辑 - 5 种 body format 切换面板** `kp-edit/desktop-format-{narrative,flat-list,accordion,compare,quad}.png` × 5
@@ -187,9 +198,9 @@
 - [ ] **1.C.8 KP 删除二次确认（confirm()）** `_dialog/kp-delete-confirm.png`
 
 #### Admin only 系统页
-- [ ] **1.D.1 学科管理（list / 新建 / 编辑）** `admin/disciplines.png`
-- [ ] **1.D.2 用户权限管理** `admin/users.png`
-- [ ] **1.D.3 API Tokens** `admin/tokens.png`
+- [x] ~~**1.D.1 学科管理（list / 新建 / 编辑）** `admin/disciplines.png`~~ → 已归档为 §1.11.2
+- [ ] **1.D.2 用户权限管理** `admin/users.png` — URL 待确认
+- [x] ~~**1.D.3 API Tokens** `admin/tokens.png`~~ → 已归档为 §1.11.1
 
 #### 移动端（mobile viewport ~390×844 / iPad Mini ~768×1024）
 - [ ] **1.E.1 学科首页 mobile** `home-disciplines/mobile.png`
