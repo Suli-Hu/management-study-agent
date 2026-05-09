@@ -1,0 +1,15 @@
+{
+  "name": "design-screenshots",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Batch screenshot capture for design handoff (agent/design/screenshots/).",
+  "scripts": {
+    "capture": "node capture-screenshots.mjs",
+    "login": "node capture-screenshots.mjs --login",
+    "install:browser": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.59.1"
+  }
+}
