@@ -45,9 +45,19 @@ API 使用的是 **学科 key（英文短码 slug）**，**不是** 界面上的
 | 层级 | 说明 | Endpoint |
 |------|------|----------|
 | 学派组（Theme） | 学派分组 | `GET /api/themes?discipline=<key>` |
+| 标签库（Tag） | discipline.tags[]（用于着色/分类） | `GET /api/tags?discipline=<key>` |
 | 学派（School） | 含 `q`、`theme` | `GET /api/schools?discipline=<key>&q=...` |
 | 学者（Scholar） | 含 `q`、`school` | `GET /api/scholars?discipline=<key>&q=...` |
 | 知识点（KP） | 含 `q`、`school`、`scholar` | `GET /api/kps?discipline=<key>&q=...` |
+
+### 列表分页（必读，防「清单缺一半」）
+
+`GET /api/kps`、`GET /api/schools`、`GET /api/scholars` 等**分页列表**：
+
+- **默认** `limit=50`；单页**最大** `limit=200`（再大也会被服务端截成 200）。
+- 响应里的 **`page.total`** 是总条数；**`page.next_offset`** 非 `null` 表示**还有下一页**，必须继续请求（同一 query，把 `offset` 设为返回的 `next_offset`），直到 **`next_offset` 为 `null`** 才算拉全。
+- **禁止**默认只打一页就当「全量清单」；做审计、统计、批量脚本前先看 `page.total`，再决定是一页 `limit=200` 还是循环翻页。
+- 需要「同学科 key 全景」做防重复时，优先 **`GET /api/v1/index/<discipline>`**（manifest），不要只靠单次 `GET /api/kps` 第一页。
 
 **一次拉全库结构（推荐开局调用）**：
 
@@ -60,7 +70,8 @@ API 使用的是 **学科 key（英文短码 slug）**，**不是** 界面上的
 |------|----------|------|
 | KP | `POST /api/kps?discipline=<key>` | Body 勿手写 `tenant_id` / `discipline`（服务端注入） |
 | 学派 | `POST /api/schools?discipline=<key>` | `themeKey` 须属于该学科 |
-| 学者 | `POST /api/scholars?discipline=<key>` | `schools` / `kpsOrder` 须为同学科 key |
+| 学者 | `POST /api/scholars?discipline=<key>` | `schools` / `kpsOrder` 须为同学科 key（**产品 B** 下新建常传 `schools: []`，学派靠 KP 维护；见 api-reference §6） |
+| 标签（Tag） | `POST /api/tags?discipline=<key>` | **冷启动可先创建 tag**；删除/更新见 `PATCH/DELETE /api/tags/:key` |
 | 学派组（Theme） | `POST /api/new/theme` | **形状特殊**，见下节 |
 
 ### 5.1 学派组创建（与 REST 不同）
@@ -78,6 +89,21 @@ API 使用的是 **学科 key（英文短码 slug）**，**不是** 界面上的
 ```
 
 `key` 可省略，服务端会生成；显式传 `key` 时不要与已有重复。
+
+### 5.2 学派组更新（PATCH）
+
+`PATCH /api/themes/<themeKey>?discipline=<key>`
+
+```json
+{
+  "json": {
+    "title": { "zh": "可选更新" },
+    "desc":  { "zh": "可选更新" }
+  }
+}
+```
+
+语义：对 `title/desc` **按语言 shallow merge**（不会覆盖未提供的语种）。
 
 ## 6. 可直接复制的 curl 样例
 
@@ -106,6 +132,7 @@ curl -sS "$BASE/api/themes?discipline=$DISCIPLINE_KEY" \
   -H "Authorization: Bearer $MS_TOKEN" | jq .
 
 # 创建 KP（最小字段示意；完整必填项见 api-reference §4）
+# 注意：「意义 / 限界」等评价六格必须写在 evaluations，不要塞进 body（见 agent/TEACHER.md）。
 curl -sS -X POST "$BASE/api/kps?discipline=$DISCIPLINE_KEY" \
   -H "Authorization: Bearer $MS_TOKEN" \
   -H "Content-Type: application/json" \
@@ -113,6 +140,9 @@ curl -sS -X POST "$BASE/api/kps?discipline=$DISCIPLINE_KEY" \
     "id": "k999",
     "title": { "zh": "示例标题", "en": "Example" },
     "body": { "zh": "示例正文" },
+    "evaluations": {
+      "zh": { "meaning": "…", "limit": "…" }
+    },
     "format": "narrative",
     "year": "",
     "schools": ["motivation"],
@@ -128,6 +158,7 @@ curl -sS -X POST "$BASE/api/kps?discipline=$DISCIPLINE_KEY" \
 
 ## 8. 常见卡点
 
+- **改学者所属学派**：优先 **PATCH `/api/kps/:id`**（`schools` / `scholars`），与站点学者详情展示口径一致；不要默认 `PATCH /api/scholars/:key` 只改 `schools`（省略 `schools` 时 API 不会动 `scholar_school` 表）。详见 api-reference §6.4、§11.2。
 - 用中文学科名当 `discipline=` → **400/403**。先 `/api/me` 或问用户要 **key**。
 - `tags` 在写入侧多为 **标签库 key**（如 `t_xxx`），不要随意造自由文本；先 `GET /api/metadata` 看 `tags[]`。
 - Theme 创建走 `POST /api/new/theme` + `{ discipline, json }`，不要假设与 `POST /api/schools` 同形。
